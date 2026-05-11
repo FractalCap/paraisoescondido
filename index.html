@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paraíso Escondido | Glamping</title>
+    
+    <!-- Fuentes de Google: Playfair Display (Serif) e Inter (Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Íconos de Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        japandi: {
+                            bg: '#F9F8F6',
+                            text: '#2D2A26',
+                            moss: '#556B52',
+                            ochre: '#C49755',
+                            indigo: '#2F3E46',
+                            light: '#EFECE6'
+                        }
+                    },
+                    animation: {
+                        'slow-pan': 'pan 30s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        pan: {
+                            '0%': { transform: 'scale(1.05) translate(0, 0)' },
+                            '100%': { transform: 'scale(1.1) translate(-2%, 2%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Animaciones de entrada */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(3rem);
+            transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1), transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Estilización del calendario nativo */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            background: transparent;
+            bottom: 0;
+            color: transparent;
+            cursor: pointer;
+            height: auto;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: auto;
+        }
+        
+        .date-input-container {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .date-input-container:focus-within {
+            border-color: #556B52;
+        }
+
+        /* Menú móvil transiciones */
+        #mobile-menu {
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        #mobile-menu.translate-x-full {
+            transform: translateX(100%);
+        }
+        
+        #mobile-menu.translate-x-0 {
+            transform: translateX(0);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-japandi-bg text-japandi-text font-sans antialiased selection:bg-japandi-moss selection:text-white overflow-x-hidden">
+
+    <!-- Navegación -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-700 ease-in-out bg-transparent py-8 text-japandi-bg">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
+            <div class="font-serif text-xl tracking-widest uppercase relative z-[60]">Paraíso Escondido</div>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex gap-10 lg:gap-12 text-sm tracking-widest uppercase items-center opacity-90">
+                <a href="#philosophy" class="hover:text-japandi-ochre transition-colors duration-300">Experiencia</a>
+                <a href="#sanctuaries" class="hover:text-japandi-moss transition-colors duration-300">Cabañas</a>
+                <a href="#reserve" class="border border-current px-6 py-2.5 hover:bg-japandi-ochre hover:border-japandi-ochre hover:text-white transition-all duration-300 rounded-sm">Reservar</a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button id="menu-toggle" class="md:hidden relative z-[60] flex flex-col gap-1.5 focus:outline-none p-2">
+                <div class="w-6 h-px bg-current transition-all duration-300 origin-center" id="line1"></div>
+                <div class="w-6 h-px bg-current transition-all duration-300 origin-center" id="line2"></div>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-japandi-bg z-50 translate-x-full flex flex-col justify-center items-center gap-12 text-japandi-text">
+        <a href="#philosophy" class="mobile-link font-serif text-3xl tracking-widest hover:text-japandi-ochre transition-colors">Experiencia</a>
+        <a href="#sanctuaries" class="mobile-link font-serif text-3xl tracking-widest hover:text-japandi-moss transition-colors">Cabañas</a>
+        <a href="#reserve" class="mobile-link font-serif text-3xl tracking-widest hover:text-japandi-ochre transition-colors border-b border-japandi-text/10 pb-2">Reservar</a>
+        
+        <div class="absolute bottom-12 flex gap-8 opacity-40">
+            <i data-lucide="instagram" class="w-6 h-6"></i>
+            <i data-lucide="facebook" class="w-6 h-6"></i>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img 
+                src="https://i.postimg.cc/9Q15dgVS/Captura-de-pantalla-2026-05-08-140349.jpg" 
+                alt="Paraíso Escondido Glamping Principal" 
+                class="w-full h-full object-cover scale-105 animate-slow-pan"
+            />
+            <div class="absolute inset-0 bg-black/50"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-japandi-bg"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto mt-24">
+            <span class="fade-in text-japandi-ochre uppercase tracking-[0.3em] text-sm mb-6 block" style="transition-delay: 200ms;">Tranquilidad y conexión con la naturaleza</span>
+            <h1 class="fade-in font-serif text-5xl md:text-7xl lg:text-8xl text-japandi-bg leading-tight mb-8" style="transition-delay: 400ms;">
+                Tu Paraíso <br/> Escondido.
+            </h1>
+            <p class="fade-in text-japandi-bg text-lg md:text-xl opacity-90 font-light max-w-2xl mx-auto leading-relaxed" style="transition-delay: 600ms;">
+                Bienvenidos a Paraíso Escondido en San Cristóbal, Antioquia. El refugio perfecto diseñado para aquellos que buscan paz y lujo en medio de la naturaleza.
+            </p>
+        </div>
+
+        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce z-10 text-japandi-bg opacity-70">
+            <i data-lucide="chevron-down" class="w-8 h-8" stroke-width="1"></i>
+        </div>
+    </section>
+
+    <!-- Experiencia -->
+    <section id="philosophy" class="py-32 md:py-48 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 md:gap-32 items-center">
+            <div class="fade-in relative">
+                <div class="aspect-[4/5] overflow-hidden rounded-sm shadow-2xl shadow-japandi-indigo/20">
+                    <img 
+                        src="https://i.postimg.cc/qRVxfv5F/asdd.jpg" 
+                        alt="Cabaña en la naturaleza" 
+                        class="w-full h-full object-cover hover:scale-105 transition-transform duration-[2000ms] ease-out"
+                    />
+                </div>
+            </div>
+            
+            <div class="flex flex-col justify-center">
+                <h2 class="fade-in font-serif text-4xl md:text-5xl mb-8 leading-tight" style="transition-delay: 100ms;">Un Escape <br/> Romántico.</h2>
+                <p class="fade-in text-lg opacity-70 font-light leading-relaxed mb-8" style="transition-delay: 300ms;">
+                    Ven a disfrutar de un escape inolvidable con tu pareja, donde podrás descansar y relajarte en un entorno idílico. Nuestro espacio está diseñado para tu desconexión total, ofreciendo el balance perfecto entre confort y el paisaje natural de San Cristóbal.
+                </p>
+                
+                <div class="fade-in grid grid-cols-2 gap-8 mt-4" style="transition-delay: 500ms;">
+                    <div>
+                        <div class="text-japandi-moss mb-3"><i data-lucide="leaf" class="w-6 h-6" stroke-width="1.5"></i></div>
+                        <h3 class="font-serif text-xl mb-2 text-japandi-text">Relajación Total</h3>
+                        <p class="text-sm opacity-60 font-light leading-relaxed">Jacuzzi privado, telescopio y senderos diseñados para respirar aire puro.</p>
+                    </div>
+                    <div>
+                        <div class="text-japandi-ochre mb-3"><i data-lucide="coffee" class="w-6 h-6" stroke-width="1.5"></i></div>
+                        <h3 class="font-serif text-xl mb-2 text-japandi-text">Gastronomía</h3>
+                        <p class="text-sm opacity-60 font-light leading-relaxed">Desayuno artesanal incluido y carta de restaurante gourmet a domicilio.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alojamientos -->
+    <section id="sanctuaries" class="py-32 md:py-40 bg-japandi-light/30 px-6">
+        <div class="fade-in text-center mb-24">
+            <span class="text-japandi-ochre uppercase tracking-[0.3em] text-sm mb-4 block">Refugios Exclusivos</span>
+            <h2 class="font-serif text-4xl md:text-5xl text-japandi-text">Alojamientos de Lujo</h2>
+        </div>
+
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 lg:gap-20">
+            <!-- Tarjeta 1: Domo Colibrí -->
+            <div class="fade-in group cursor-pointer" style="transition-delay: 100ms;">
+                <div class="aspect-[3/4] overflow-hidden mb-8 rounded-sm shadow-xl">
+                    <img 
+                        src="https://i.postimg.cc/59vLdJ5c/ec624c06-0a0d-4ea6-8b07-581ebc6703cd.avif" 
+                        alt="Domo Colibrí" 
+                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms] ease-out"
+                    />
+                </div>
+                <div class="flex flex-col">
+                    <h3 class="font-serif text-3xl mb-3 text-japandi-text group-hover:text-japandi-ochre transition-colors duration-500">Domo Colibrí</h3>
+                    <div class="mb-4 flex gap-4 items-center">
+                        <span class="text-japandi-moss font-medium text-sm tracking-widest uppercase">Desde $300.000</span>
+                        <div class="h-px flex-1 bg-japandi-text/10"></div>
+                    </div>
+                    <p class="text-sm opacity-60 font-light leading-relaxed mb-6">Incluye jacuzzi caliente, ducha al aire libre, malla catamarán, telescopio y desayuno artesanal.</p>
+                    <div class="flex items-center gap-2 text-xs uppercase tracking-widest text-japandi-ochre font-medium">
+                        Ver Detalles <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta 2: Cabaña Cristal -->
+            <div class="fade-in group cursor-pointer md:mt-24" style="transition-delay: 300ms;">
+                <div class="aspect-[3/4] overflow-hidden mb-8 rounded-sm shadow-xl">
+                    <img 
+                        src="https://i.postimg.cc/7LGb31mC/Captura-de-pantalla-2026-05-11-141013.jpg" 
+                        alt="Cabaña Cristal" 
+                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms] ease-out"
+                    />
+                </div>
+                <div class="flex flex-col">
+                    <h3 class="font-serif text-3xl mb-3 text-japandi-text group-hover:text-japandi-indigo transition-colors duration-500">Cabaña Cristal</h3>
+                    <div class="mb-4 flex gap-4 items-center">
+                        <span class="text-japandi-indigo font-medium text-sm tracking-widest uppercase">Consultar Tarifa</span>
+                        <div class="h-px flex-1 bg-japandi-text/10"></div>
+                    </div>
+                    <p class="text-sm opacity-60 font-light leading-relaxed mb-6">Espacio cristalino con jacuzzi privado, cocina dotada, sala con TV, asador de barril y sofá cama.</p>
+                    <div class="flex items-center gap-2 text-xs uppercase tracking-widest text-japandi-indigo font-medium">
+                        Ver Detalles <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservas -->
+    <section id="reserve" class="py-32 md:py-48 px-6 bg-japandi-bg border-t border-japandi-light">
+        <div class="max-w-4xl mx-auto">
+            <div class="fade-in text-center mb-16">
+                <span class="text-japandi-ochre uppercase tracking-[0.4em] text-xs mb-4 block font-semibold">Disponibilidad en tiempo real</span>
+                <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl text-japandi-text mb-6">Reserva tu Estadía</h2>
+                <div class="w-16 h-0.5 bg-japandi-ochre mx-auto opacity-40"></div>
+            </div>
+
+            <div class="fade-in bg-white p-8 md:p-14 rounded-sm shadow-[0_40px_80px_-15px_rgba(45,42,38,0.08)]" style="transition-delay: 200ms;">
+                <form class="space-y-12">
+                    <!-- Selector de Fechas -->
+                    <div class="grid md:grid-cols-2 gap-10 lg:gap-16">
+                        <div class="date-input-container border-b border-japandi-text/10 pb-4">
+                            <label class="block text-[10px] uppercase tracking-[0.2em] text-japandi-text/40 mb-4 font-bold">Llegada</label>
+                            <div class="flex items-center gap-4">
+                                <i data-lucide="calendar" class="w-5 h-5 text-japandi-moss opacity-70"></i>
+                                <span id="checkin-display" class="text-lg font-serif text-japandi-text font-medium">11 de mayo, 2026</span>
+                                <input type="date" id="checkin-date" class="opacity-0 absolute inset-0 w-full" required>
+                            </div>
+                        </div>
+                        
+                        <div class="date-input-container border-b border-japandi-text/10 pb-4">
+                            <label class="block text-[10px] uppercase tracking-[0.2em] text-japandi-text/40 mb-4 font-bold">Salida</label>
+                            <div class="flex items-center gap-4">
+                                <i data-lucide="calendar-check" class="w-5 h-5 text-japandi-ochre opacity-70"></i>
+                                <span id="checkout-display" class="text-lg font-serif text-japandi-text font-medium">12 de mayo, 2026</span>
+                                <input type="date" id="checkout-date" class="opacity-0 absolute inset-0 w-full" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-10 lg:gap-16">
+                        <div class="border-b border-japandi-text/10 pb-4">
+                            <label class="block text-[10px] uppercase tracking-[0.2em] text-japandi-text/40 mb-4 font-bold">Tipo de Alojamiento</label>
+                            <div class="flex items-center gap-4">
+                                <i data-lucide="home" class="w-5 h-5 text-japandi-indigo opacity-70"></i>
+                                <select class="bg-transparent w-full focus:outline-none text-lg font-serif appearance-none cursor-pointer text-japandi-text font-medium">
+                                    <option>Domo Colibrí (Parejas)</option>
+                                    <option>Cabaña Cristal (Familiar)</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="border-b border-japandi-text/10 pb-4">
+                            <label class="block text-[10px] uppercase tracking-[0.2em] text-japandi-text/40 mb-4 font-bold">Huéspedes</label>
+                            <div class="flex items-center gap-4">
+                                <i data-lucide="users" class="w-5 h-5 text-japandi-text/30"></i>
+                                <select class="bg-transparent w-full focus:outline-none text-lg font-serif appearance-none cursor-pointer text-japandi-text font-medium">
+                                    <option>2 Personas</option>
+                                    <option>1 Persona</option>
+                                    <option>Más de 2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6">
+                        <button 
+                            type="button"
+                            class="w-full bg-japandi-text hover:bg-black text-japandi-bg py-6 px-10 flex justify-between items-center transition-all duration-500 rounded-sm group shadow-xl hover:shadow-japandi-text/10"
+                        >
+                            <span class="font-sans text-sm tracking-[0.3em] uppercase font-semibold">Solicitar Disponibilidad</span>
+                            <i data-lucide="arrow-right" class="transform group-hover:translate-x-3 transition-transform duration-500 w-6 h-6" stroke-width="1.5"></i>
+                        </button>
+                        <p class="text-center text-[9px] opacity-30 mt-8 tracking-[0.2em] uppercase font-bold">
+                            Serás redirigido a una atención personalizada vía WhatsApp
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-japandi-text text-japandi-bg py-24 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-16">
+            <div>
+                <div class="font-serif text-2xl tracking-widest mb-6 text-japandi-ochre uppercase">Paraíso Escondido</div>
+                <p class="opacity-40 font-light text-sm leading-relaxed max-w-xs">
+                    Redescubre la tranquilidad en un entorno de lujo consciente y belleza natural.
+                </p>
+            </div>
+            
+            <div class="space-y-6">
+                <h4 class="text-[10px] uppercase tracking-[0.3em] opacity-40 font-bold">Servicios</h4>
+                <ul class="space-y-4 opacity-60 font-light text-sm">
+                    <li><a href="#" class="hover:text-japandi-ochre transition-colors">Decoraciones Especiales</a></li>
+                    <li><a href="#" class="hover:text-japandi-ochre transition-colors">Cenas Románticas</a></li>
+                    <li><a href="#" class="hover:text-japandi-ochre transition-colors">Senderismo Guiado</a></li>
+                </ul>
+            </div>
+
+            <div class="space-y-6">
+                <h4 class="text-[10px] uppercase tracking-[0.3em] opacity-40 font-bold">Contacto</h4>
+                <div class="flex items-start opacity-60 font-light text-sm">
+                    <i data-lucide="map-pin" class="mr-3 w-4 h-4 opacity-40"></i>
+                    <p>Vereda La Palma, San Cristóbal<br/>Antioquia, Colombia.</p>
+                </div>
+                <div class="flex items-center gap-6 pt-4 opacity-40 hover:opacity-100 transition-opacity">
+                    <i data-lucide="instagram" class="w-5 h-5 cursor-pointer"></i>
+                    <i data-lucide="facebook" class="w-5 h-5 cursor-pointer"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto mt-24 pt-8 border-t border-japandi-bg/10 flex flex-col md:flex-row justify-between items-center text-[9px] opacity-20 tracking-widest uppercase font-bold">
+            <p>&copy; 2026 Paraíso Escondido Glamping.</p>
+            <div class="flex gap-8 mt-4 md:mt-0">
+                <span>Aviso de Privacidad</span>
+                <span>Términos de Uso</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Lógica de navegación scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-japandi-bg/95', 'backdrop-blur-xl', 'shadow-sm', 'py-4', 'text-japandi-text');
+                navbar.classList.remove('bg-transparent', 'py-8', 'text-japandi-bg');
+            } else {
+                navbar.classList.add('bg-transparent', 'py-8', 'text-japandi-bg');
+                navbar.classList.remove('bg-japandi-bg/95', 'backdrop-blur-xl', 'shadow-sm', 'py-4', 'text-japandi-text');
+            }
+        });
+
+        // Lógica Menú Móvil
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const line1 = document.getElementById('line1');
+        const line2 = document.getElementById('line2');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('translate-x-full');
+                mobileMenu.classList.add('translate-x-0');
+                line1.style.transform = 'translateY(4px) rotate(45deg)';
+                line2.style.transform = 'translateY(-4px) rotate(-45deg)';
+                document.body.style.overflow = 'hidden';
+            } else {
+                mobileMenu.classList.remove('translate-x-0');
+                mobileMenu.classList.add('translate-x-full');
+                line1.style.transform = 'none';
+                line2.style.transform = 'none';
+                document.body.style.overflow = '';
+            }
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+        
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                toggleMenu();
+            });
+        });
+
+        // Animaciones Scroll & Fechas
+        document.addEventListener("DOMContentLoaded", function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+            const checkin = document.getElementById('checkin-date');
+            const checkout = document.getElementById('checkout-date');
+            const checkinDisplay = document.getElementById('checkin-display');
+            const checkoutDisplay = document.getElementById('checkout-display');
+
+            const formatDate = (dateString) => {
+                const options = { month: 'long', day: 'numeric' };
+                const date = new Date(dateString + 'T00:00:00');
+                return `${date.getDate()} de ${date.toLocaleDateString('es-ES', { month: 'long' })}, 2026`;
+            };
+
+            const today = "2026-05-11";
+            checkin.min = today;
+            checkin.value = today;
+            checkinDisplay.innerText = formatDate(today);
+
+            const tomorrowDate = new Date("2026-05-11T00:00:00");
+            tomorrowDate.setDate(tomorrowDate.getDate() + 1);
+            const tomorrow = tomorrowDate.toISOString().split('T')[0];
+            checkout.min = tomorrow;
+            checkout.value = tomorrow;
+            checkoutDisplay.innerText = formatDate(tomorrow);
+
+            checkin.addEventListener('change', (e) => {
+                checkinDisplay.innerText = formatDate(e.target.value);
+                const nextDay = new Date(e.target.value + 'T00:00:00');
+                nextDay.setDate(nextDay.getDate() + 1);
+                const nextDayStr = nextDay.toISOString().split('T')[0];
+                checkout.min = nextDayStr;
+                if (checkout.value <= e.target.value) {
+                    checkout.value = nextDayStr;
+                    checkoutDisplay.innerText = formatDate(nextDayStr);
+                }
+            });
+
+            checkout.addEventListener('change', (e) => {
+                checkoutDisplay.innerText = formatDate(e.target.value);
+            });
+        });
+    </script>
+</body>
+</html>
