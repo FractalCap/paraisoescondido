@@ -33,7 +33,7 @@
       "@context": "https://schema.org",
       "@type": "LodgingBusiness",
       "name": "Paraíso Escondido Glamping",
-      "description": "Un santuario minimalista diseñado para parejas y familias que buscan pausar y respirar en medio de la naturaleza.",
+      "description": "Un Paraíso Escondido minimalista diseñado para parejas y familias que buscan pausar y respirar en medio de la naturaleza.",
       "url": "https://www.tudominio.com",
       "telephone": "+573113494586",
       "image": "https://i.postimg.cc/9Q15dgVS/Captura-de-pantalla-2026-05-08-140349.jpg",
@@ -57,6 +57,7 @@
          ========================================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Playfair Display (Serif, Autoridad/Elegancia) & Inter (Sans, Legibilidad/Minimalismo) -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <!-- ==========================================
@@ -78,13 +79,13 @@
                     },
                     colors: {
                         japandi: {
-                            bg: '#F9F8F6',     
-                            text: '#2D2A26',   
-                            moss: '#556B52',   
-                            ochre: '#C49755',  
-                            indigo: '#2F3E46', 
-                            light: '#EFECE6',  
-                            border: '#E2DFD8'  
+                            bg: '#F9F8F6',     /* Blanco cálido hueso */
+                            text: '#2D2A26',   /* Carbón profundo */
+                            moss: '#556B52',   /* Verde musgo - Anclaje natural */
+                            ochre: '#C49755',  /* Ocre/Madera clara - Calidez */
+                            indigo: '#2F3E46', /* Índigo grisáceo - Profundidad */
+                            light: '#EFECE6',  /* Crema sutil para contraste */
+                            border: '#E2DFD8'  /* Bordes ultra suaves */
                         }
                     },
                     animation: {
@@ -314,7 +315,7 @@
                 
                 <div class="fade-in space-y-4 md:space-y-6 text-base md:text-lg text-japandi-text/70 font-light leading-relaxed" style="transition-delay: 300ms;">
                     <p>Entre montañas y naturaleza viva, descubre nuestro refugio diseñado para pausar, respirar y reconectar contigo.</p>
-                    <p>Explora senderos ecológicos y hospédate en santuarios con esencia propia. Despierta abrazado por el bosque y vive la magia de la verdadera desconexión.</p>
+                    <p>Explora senderos ecológicos y hospédate en Paraíso Escondido con esencia propia. Despierta abrazado por el bosque y vive la magia de la verdadera desconexión.</p>
                 </div>
             </div>
             
@@ -374,7 +375,7 @@
                 </div>
                 
                 <h2 class="fade-in font-serif text-3xl md:text-4xl lg:text-5xl mb-6 md:mb-8 leading-tight text-japandi-text" style="transition-delay: 150ms;">
-                    Alta gastronomía en tu santuario.
+                    Alta gastronomía en Paraíso Escondido.
                 </h2>
                 
                 <div class="fade-in space-y-4 md:space-y-6 text-base md:text-lg text-japandi-text/70 font-light leading-relaxed" style="transition-delay: 300ms;">
@@ -383,39 +384,43 @@
                 </div>
                 
                 <div class="fade-in mt-10 md:mt-12 flex justify-center lg:justify-start" style="transition-delay: 450ms;">
-                    <a href="https://maps.app.goo.gl/52wUQ65YMuEcmoaU8" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-4 border border-japandi-text text-japandi-text px-8 py-4 text-[10px] md:text-xs uppercase tracking-[0.2em] font-semibold hover:bg-japandi-text hover:text-white transition-all duration-500 rounded-sm group">
-                        Ver Carta y Aliado
-                        <i data-lucide="external-link" class="w-4 h-4 transform group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform duration-300"></i>
+                    <a href="https://wa.me/573022296614?text=Hola,%20me%20gustar%C3%ADa%20pedir%20un%20domicilio%20a%20Para%C3%ADso%20Escondido" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-4 border border-japandi-text text-japandi-text px-8 py-4 text-[10px] md:text-xs uppercase tracking-[0.2em] font-semibold hover:bg-japandi-text hover:text-white transition-all duration-500 rounded-sm group">
+                        Pide tu domicilio
+                        <i data-lucide="message-circle" class="w-4 h-4 transform group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform duration-300"></i>
                     </a>
                 </div>
             </div>
 
             <!-- Video (Derecha) -->
             <div class="lg:col-span-6 lg:col-start-7 fade-in order-1 lg:order-2 mb-10 lg:mb-0 relative" style="transition-delay: 400ms;">
-                <!-- Fondo decorativo detrás del video para darle volumen -->
-                <div class="absolute -inset-4 bg-japandi-bg rounded-sm transform rotate-3 z-0"></div>
                 
-                <div class="relative aspect-[4/5] md:aspect-square lg:aspect-[4/5] overflow-hidden rounded-sm shadow-2xl shadow-japandi-text/10 group z-10">
+                <!-- Contenedor del video interactivo -->
+                <div id="gastro-video-container" class="relative w-full max-w-sm mx-auto aspect-[9/16] overflow-hidden rounded-sm shadow-2xl shadow-japandi-text/10 group z-10 cursor-pointer bg-japandi-bg">
                     
-                    <!-- Overlay sutil -->
-                    <div class="absolute inset-0 bg-black/5 z-10 pointer-events-none group-hover:opacity-0 transition-opacity duration-700"></div>
-                    
-                    <!-- Etiqueta superior flotante -->
-                    <div class="absolute top-6 right-6 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-sm shadow-sm z-20">
-                        <span class="text-[9px] uppercase tracking-widest font-bold text-japandi-text flex items-center gap-2">
-                            <i data-lucide="utensils" class="w-3 h-3 text-japandi-ochre"></i> Room Service
-                        </span>
+                    <!-- Overlay Interactivo -->
+                    <div id="gastro-overlay" class="absolute inset-0 bg-black/30 z-30 flex flex-col items-center justify-center text-center p-6 transition-opacity duration-500 backdrop-blur-[2px]">
+                        
+                        <!-- Botón Play -->
+                        <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg group-hover:shadow-xl border border-japandi-border/50">
+                            <!-- ml-1 para centrar ópticamente el triángulo -->
+                            <i data-lucide="play" class="w-6 h-6 md:w-8 md:h-8 text-japandi-text ml-1.5 fill-japandi-text"></i>
+                        </div>
+                        
+                        <!-- Textos -->
+                        <h3 class="font-serif text-2xl md:text-3xl text-white mt-6 mb-3 tracking-wide">Haz click para comenzar</h3>
+                        <p class="text-[10px] text-white/90 flex items-center justify-center gap-2 font-sans tracking-widest uppercase">
+                            <i data-lucide="volume-2" class="w-4 h-4 shrink-0"></i> Inicia con sonido
+                        </p>
                     </div>
 
+                    <!-- Video original sin autoplay y sin mute inicial -->
                     <video 
-                        autoplay 
-                        muted 
+                        id="gastro-video"
                         loop 
                         playsinline 
-                        poster="https://i.imgur.com/bGGYztg.jpg"
-                        class="w-full h-full object-cover shrink-0 scale-105 group-hover:scale-100 transition-transform duration-1000"
+                        class="w-full h-full object-cover shrink-0 opacity-80 transition-opacity duration-500"
                     >
-                        <source src="ruta-de-tu-video-restaurante.mp4" type="video/mp4">
+                        <source src="gastronomia.mp4" type="video/mp4">
                         Tu navegador no soporta videos HTML5.
                     </video>
                 </div>
@@ -442,7 +447,7 @@
             
             <div class="fade-in space-y-4 md:space-y-6 text-base md:text-lg text-japandi-text/70 font-light leading-relaxed" style="transition-delay: 300ms;">
                 <p>Sabemos que hay fechas inolvidables. Ya sea un aniversario, un cumpleaños o una pedida de mano.</p>
-                <p>Con nuestro <strong>servicio de decoración personalizado</strong>, nos encargamos de cada detalle (pétalos, velas, luces y bebidas) para que tu sorpresa romántica sea simplemente perfecta.</p>
+                <p>Con nuestro <strong>servicio de decoración personalizado</strong>, nos encargamos de cada detalle (pétalos, velas, luces y cena romántica) para que tu sorpresa romántica sea simplemente perfecta.</p>
             </div>
             
             <div class="fade-in mt-10 md:mt-12" style="transition-delay: 450ms;">
@@ -462,7 +467,7 @@
         <div class="max-w-7xl mx-auto text-center">
             <div class="fade-in text-center mb-16 md:mb-24">
                 <span class="text-japandi-ochre uppercase tracking-[0.3em] text-[10px] md:text-xs font-semibold mb-3 md:mb-4 block">Experiencias Reales</span>
-                <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl text-japandi-text mb-6 md:mb-8">Lo que dicen quienes nos han visitado</h2>
+                <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl text-japandi-text mb-6 md:mb-8">Reseñas</h2>
                 
                 <!-- Premium Rating Pill -->
                 <div class="inline-flex items-center justify-center gap-4 bg-white px-8 py-4 rounded-full shadow-[0_10px_30px_-10px_rgba(45,42,38,0.08)] border border-japandi-border/50">
@@ -1119,6 +1124,28 @@
             document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
             document.getElementById('current-year').textContent = new Date().getFullYear();
             
+            // Lógica del Video Interactivo de Gastronomía
+            const gastroContainer = document.getElementById('gastro-video-container');
+            const gastroOverlay = document.getElementById('gastro-overlay');
+            const gastroVideo = document.getElementById('gastro-video');
+
+            if (gastroContainer && gastroVideo && gastroOverlay) {
+                gastroContainer.addEventListener('click', () => {
+                    if (gastroVideo.paused) {
+                        gastroVideo.muted = false; // Asegura que el sonido esté activado
+                        gastroVideo.play();
+                        gastroVideo.classList.remove('opacity-80');
+                        gastroVideo.classList.add('opacity-100');
+                        gastroOverlay.classList.add('opacity-0', 'pointer-events-none');
+                    } else {
+                        gastroVideo.pause();
+                        gastroVideo.classList.remove('opacity-100');
+                        gastroVideo.classList.add('opacity-80');
+                        gastroOverlay.classList.remove('opacity-0', 'pointer-events-none');
+                    }
+                });
+            }
+
             initDateLogic();
             initSliders();
         });
