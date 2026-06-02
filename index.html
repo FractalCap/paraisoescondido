@@ -57,7 +57,6 @@
          ========================================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Playfair Display (Serif, Autoridad/Elegancia) & Inter (Sans, Legibilidad/Minimalismo) -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <!-- ==========================================
@@ -79,13 +78,13 @@
                     },
                     colors: {
                         japandi: {
-                            bg: '#F9F8F6',     /* Blanco cálido hueso */
-                            text: '#2D2A26',   /* Carbón profundo */
-                            moss: '#556B52',   /* Verde musgo - Anclaje natural */
-                            ochre: '#C49755',  /* Ocre/Madera clara - Calidez */
-                            indigo: '#2F3E46', /* Índigo grisáceo - Profundidad */
-                            light: '#EFECE6',  /* Crema sutil para contraste */
-                            border: '#E2DFD8'  /* Bordes ultra suaves */
+                            bg: '#F9F8F6',     
+                            text: '#2D2A26',   
+                            moss: '#556B52',   
+                            ochre: '#C49755',  
+                            indigo: '#2F3E46', 
+                            light: '#EFECE6',  
+                            border: '#E2DFD8'  
                         }
                     },
                     animation: {
@@ -106,15 +105,20 @@
          ESTILOS PERSONALIZADOS & MICRO-INTERACCIONES
          ========================================== -->
     <style>
-        /* Base de Scroll Suave y Efecto Snap (Enganche Inmediato) */
+        /* Base de Scroll Suave para todos los dispositivos */
         html { 
             scroll-behavior: smooth; 
-            scroll-snap-type: y mandatory;
         }
         
-        /* Enganche magnético de cada sección al inicio de la pantalla */
-        section, footer {
-            scroll-snap-align: start;
+        /* Efecto Snap (Enganche Inmediato) SOLO para PC / Pantallas grandes (>= 768px) */
+        @media (min-width: 768px) {
+            html {
+                scroll-snap-type: y mandatory;
+            }
+            /* Enganche magnético de cada sección al inicio de la pantalla */
+            section, footer {
+                scroll-snap-align: start;
+            }
         }
         
         /* Ocultar scrollbar para un look más limpio (opcional) */
