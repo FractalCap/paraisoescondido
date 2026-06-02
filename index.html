@@ -367,8 +367,8 @@
     <section id="gastronomia" class="py-20 md:py-32 lg:py-40 px-6 bg-white border-b border-japandi-border/50 overflow-hidden">
         <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 md:gap-16 items-center">
             
-            <!-- Texto (Izquierda) -->
-            <div class="lg:col-span-5 lg:col-start-1 flex flex-col justify-center order-2 lg:order-1 text-center lg:text-left">
+            <!-- Texto (Izquierda en PC, Arriba en Móvil) -->
+            <div class="lg:col-span-5 lg:col-start-1 flex flex-col justify-center order-1 text-center lg:text-left">
                 <div class="fade-in flex items-center justify-center lg:justify-start gap-4 mb-6 md:mb-8">
                     <div class="w-10 md:w-12 h-[1px] bg-japandi-ochre"></div>
                     <span class="text-japandi-ochre uppercase tracking-[0.3em] text-[10px] md:text-xs font-semibold">Sabores a tu puerta</span>
@@ -391,36 +391,37 @@
                 </div>
             </div>
 
-            <!-- Video (Derecha) -->
-            <div class="lg:col-span-6 lg:col-start-7 fade-in order-1 lg:order-2 mb-10 lg:mb-0 relative" style="transition-delay: 400ms;">
+            <!-- Video (Derecha en PC, Abajo en Móvil) -->
+            <div class="lg:col-span-6 lg:col-start-7 fade-in order-2 mt-10 lg:mt-0 relative" style="transition-delay: 400ms;">
                 
                 <!-- Contenedor del video interactivo -->
                 <div id="gastro-video-container" class="relative w-full max-w-sm mx-auto aspect-[9/16] overflow-hidden rounded-sm shadow-2xl shadow-japandi-text/10 group z-10 cursor-pointer bg-japandi-bg">
                     
                     <!-- Overlay Interactivo -->
-                    <div id="gastro-overlay" class="absolute inset-0 bg-black/30 z-30 flex flex-col items-center justify-center text-center p-6 transition-opacity duration-500 backdrop-blur-[2px]">
+                    <div id="gastro-overlay" class="absolute inset-0 bg-japandi-text/20 z-30 flex flex-col items-center justify-center text-center p-6 transition-opacity duration-500 backdrop-blur-[1px]">
                         
-                        <!-- Botón Play -->
-                        <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg group-hover:shadow-xl border border-japandi-border/50">
+                        <!-- Botón Play Elegante -->
+                        <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/70 backdrop-blur-md flex items-center justify-center hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg group-hover:shadow-xl border border-japandi-border/30">
                             <!-- ml-1 para centrar ópticamente el triángulo -->
-                            <i data-lucide="play" class="w-6 h-6 md:w-8 md:h-8 text-japandi-text ml-1.5 fill-japandi-text"></i>
+                            <i data-lucide="play" class="w-6 h-6 md:w-8 md:h-8 text-japandi-text ml-1.5 fill-japandi-text opacity-90"></i>
                         </div>
                         
-                        <!-- Textos -->
-                        <h3 class="font-serif text-2xl md:text-3xl text-white mt-6 mb-3 tracking-wide">Haz click para comenzar</h3>
-                        <p class="text-[10px] text-white/90 flex items-center justify-center gap-2 font-sans tracking-widest uppercase">
-                            <i data-lucide="volume-2" class="w-4 h-4 shrink-0"></i> Inicia con sonido
+                        <!-- Textos Minimalistas -->
+                        <h3 class="font-serif text-xl md:text-2xl text-white mt-6 mb-2 tracking-wide drop-shadow-md">Haz click para comenzar</h3>
+                        <p class="text-[9px] text-white/90 flex items-center justify-center gap-1.5 font-sans tracking-widest uppercase drop-shadow-sm">
+                            <i data-lucide="volume-2" class="w-3.5 h-3.5 shrink-0"></i> Inicia con sonido
                         </p>
                     </div>
 
-                    <!-- Video original sin autoplay y sin mute inicial -->
+                    <!-- Video original sin autoplay y sin mute inicial. Sin imagen poster forzada y con #t=0.001 para autogenerar thumbnail nativo -->
                     <video 
                         id="gastro-video"
+                        preload="metadata"
                         loop 
                         playsinline 
-                        class="w-full h-full object-cover shrink-0 opacity-80 transition-opacity duration-500"
+                        class="w-full h-full object-cover shrink-0 opacity-90 transition-opacity duration-500"
                     >
-                        <source src="gastronomia.mp4" type="video/mp4">
+                        <source src="gastronomia.mp4#t=0.001" type="video/mp4">
                         Tu navegador no soporta videos HTML5.
                     </video>
                 </div>
